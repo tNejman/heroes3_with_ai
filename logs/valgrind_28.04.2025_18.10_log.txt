@@ -1,0 +1,58 @@
+==5178== Memcheck, a memory error detector
+==5178== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==5178== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==5178== Command: ./build/bin/Heroes3App
+==5178== Parent PID: 369
+==5178== 
+==5178== Invalid read of size 8
+==5178==    at 0x114D1C: std::__shared_ptr<Tile, (__gnu_cxx::_Lock_policy)2>::get() const (shared_ptr_base.h:1666)
+==5178==    by 0x11302B: std::__shared_ptr_access<Tile, (__gnu_cxx::_Lock_policy)2, false, false>::_M_get() const (shared_ptr_base.h:1363)
+==5178==    by 0x110F77: std::__shared_ptr_access<Tile, (__gnu_cxx::_Lock_policy)2, false, false>::operator->() const (shared_ptr_base.h:1357)
+==5178==    by 0x10CE76: main (Main.cc:54)
+==5178==  Address 0x4e283e0 is 0 bytes after a block of size 2,672 alloc'd
+==5178==    at 0x4846FA3: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5178==    by 0x11F4A8: std::__new_allocator<std::_Sp_counted_ptr_inplace<BattleField, std::allocator<void>, (__gnu_cxx::_Lock_policy)2> >::allocate(unsigned long, void const*) (new_allocator.h:151)
+==5178==    by 0x11B663: allocate (alloc_traits.h:482)
+==5178==    by 0x11B663: std::__allocated_ptr<std::allocator<std::_Sp_counted_ptr_inplace<BattleField, std::allocator<void>, (__gnu_cxx::_Lock_policy)2> > > std::__allocate_guarded<std::allocator<std::_Sp_counted_ptr_inplace<BattleField, std::allocator<void>, (__gnu_cxx::_Lock_policy)2> > >(std::allocator<std::_Sp_counted_ptr_inplace<BattleField, std::allocator<void>, (__gnu_cxx::_Lock_policy)2> >&) (allocated_ptr.h:98)
+==5178==    by 0x11803D: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<BattleField, std::allocator<void>, std::shared_ptr<GridTile>&>(BattleField*&, std::_Sp_alloc_shared_tag<std::allocator<void> >, std::shared_ptr<GridTile>&) (shared_ptr_base.h:969)
+==5178==    by 0x114D6F: std::__shared_ptr<BattleField, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<std::allocator<void>, std::shared_ptr<GridTile>&>(std::_Sp_alloc_shared_tag<std::allocator<void> >, std::shared_ptr<GridTile>&) (shared_ptr_base.h:1712)
+==5178==    by 0x11307A: std::shared_ptr<BattleField>::shared_ptr<std::allocator<void>, std::shared_ptr<GridTile>&>(std::_Sp_alloc_shared_tag<std::allocator<void> >, std::shared_ptr<GridTile>&) (shared_ptr.h:464)
+==5178==    by 0x110FC1: std::shared_ptr<std::enable_if<!std::is_array<BattleField>::value, BattleField>::type> std::make_shared<BattleField, std::shared_ptr<GridTile>&>(std::shared_ptr<GridTile>&) (shared_ptr.h:1010)
+==5178==    by 0x10F5FE: Battle::Battle(std::shared_ptr<Character>, std::shared_ptr<Character>, std::shared_ptr<GridTile>) (Battle.h:41)
+==5178==    by 0x111739: std::__detail::_MakeUniq<Battle>::__single_object std::make_unique<Battle, std::shared_ptr<Character>, std::shared_ptr<Character>, std::shared_ptr<GridTile> >(std::shared_ptr<Character>&&, std::shared_ptr<Character>&&, std::shared_ptr<GridTile>&&) (unique_ptr.h:1070)
+==5178==    by 0x10CCA4: main (Main.cc:41)
+==5178== 
+==5178== Invalid write of size 8
+==5178==    at 0x128157: std::__shared_ptr<TileObject, (__gnu_cxx::_Lock_policy)2>::operator=(std::__shared_ptr<TileObject, (__gnu_cxx::_Lock_policy)2> const&) (shared_ptr_base.h:1523)
+==5178==    by 0x1281A2: std::shared_ptr<TileObject>::operator=(std::shared_ptr<TileObject> const&) (shared_ptr.h:414)
+==5178==    by 0x127F96: Tile::setObject(std::shared_ptr<TileObject>) (Tile.cc:11)
+==5178==    by 0x10CEA4: main (Main.cc:54)
+==5178==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==5178== 
+==5178== 
+==5178== Process terminating with default action of signal 11 (SIGSEGV)
+==5178==  Access not within mapped region at address 0x0
+==5178==    at 0x128157: std::__shared_ptr<TileObject, (__gnu_cxx::_Lock_policy)2>::operator=(std::__shared_ptr<TileObject, (__gnu_cxx::_Lock_policy)2> const&) (shared_ptr_base.h:1523)
+==5178==    by 0x1281A2: std::shared_ptr<TileObject>::operator=(std::shared_ptr<TileObject> const&) (shared_ptr.h:414)
+==5178==    by 0x127F96: Tile::setObject(std::shared_ptr<TileObject>) (Tile.cc:11)
+==5178==    by 0x10CEA4: main (Main.cc:54)
+==5178==  If you believe this happened as a result of a stack
+==5178==  overflow in your program's main thread (unlikely but
+==5178==  possible), you can try to increase the size of the
+==5178==  main thread stack using the --main-stacksize= flag.
+==5178==  The main thread stack size used in this run was 8388608.
+==5178== 
+==5178== HEAP SUMMARY:
+==5178==     in use at exit: 121,442 bytes in 567 blocks
+==5178==   total heap usage: 783 allocs, 216 frees, 131,620 bytes allocated
+==5178== 
+==5178== LEAK SUMMARY:
+==5178==    definitely lost: 0 bytes in 0 blocks
+==5178==    indirectly lost: 0 bytes in 0 blocks
+==5178==      possibly lost: 0 bytes in 0 blocks
+==5178==    still reachable: 121,442 bytes in 567 blocks
+==5178==         suppressed: 0 bytes in 0 blocks
+==5178== Rerun with --leak-check=full to see details of leaked memory
+==5178== 
+==5178== For lists of detected and suppressed errors, rerun with: -s
+==5178== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
