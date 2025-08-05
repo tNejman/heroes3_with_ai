@@ -1,0 +1,5 @@
+{
+   wsl_lib
+   Memcheck:Cond
+   obj:/usr/lib/wsl/*
+}
